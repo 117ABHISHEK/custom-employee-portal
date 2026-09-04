@@ -26,6 +26,7 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/auth', require('./src/routes/authRoutes'));
 app.use('/api/admin', require('./src/routes/adminRoutes'));
+app.use('/api/zoho', require('./src/routes/zohoRoutes'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
