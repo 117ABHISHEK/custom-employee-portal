@@ -1,29 +1,31 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { getUser, isAuthenticated, logout } from '@/utils/auth';
+import { useEffect, useState } from 'react';
+import ProtectedRoute from '@/components/ProtectedRoute';
+import Navbar from '@/components/Navbar';
+import { getUser } from '@/utils/auth';
 
 const ZOHO_APPS = [
-  { permission: 'access:zoho_people', label: 'Zoho People', apiPath: '/zoho/people', externalUrl: 'https://people.zoho.in' },
-  { permission: 'access:zoho_crm', label: 'Zoho CRM', apiPath: '/zoho/crm', externalUrl: 'https://crm.zoho.in' },
-  { permission: 'access:zoho_desk', label: 'Zoho Desk', apiPath: '/zoho/desk', externalUrl: 'https://desk.zoho.in' },
-  { permission: 'access:zoho_books', label: 'Zoho Books', apiPath: '/zoho/books', externalUrl: 'https://books.zoho.in' },
+  { permission: 'access:zoho_people', label: 'Zoho People', externalUrl: 'https://people.zoho.in' },
+  { permission: 'access:zoho_crm', label: 'Zoho CRM', externalUrl: 'https://crm.zoho.in' },
+  { permission: 'access:zoho_desk', label: 'Zoho Desk', externalUrl: 'https://desk.zoho.in' },
+  { permission: 'access:zoho_books', label: 'Zoho Books', externalUrl: 'https://books.zoho.in' },
 ];
 
 export default function DashboardPage() {
-  const router = useRouter();
-  const [user] = useState(() => (typeof window !== 'undefined' ? getUser() : null));
+  return (
+    <ProtectedRoute>
+      <DashboardContent />
+    </ProtectedRoute>
+  );
+}
 
-  if (typeof window !== 'undefined' && !isAuthenticated()) {
-    router.replace('/login');
-    return null;
-  }
+function DashboardContent() {
+  const [user, setUser] = useState(null);
 
-  const handleLogout = () => {
-    logout();
-    router.push('/login');
-  };
+  useEffect(() => {
+    setUser(getUser());
+  }, []);
 
   if (!user) return null;
 
@@ -31,32 +33,9 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow px-6 py-4 flex justify-between items-center">
-        <h1 className="text-xl font-semibold text-gray-800">BrainWave Portal</h1>
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-gray-600">
-            {user.name} <span className="text-gray-400">({user.role})</span>
-          </span>
-          {user.role === 'Admin' && (
-            <button
-              onClick={() => router.push('/admin')}
-              className="text-sm text-blue-600 hover:underline"
-            >
-              Admin Panel
-            </button>
-          )}
-          <button
-            onClick={handleLogout}
-            className="text-sm bg-gray-200 px-3 py-1.5 rounded hover:bg-gray-300"
-          >
-            Logout
-          </button>
-        </div>
-      </nav>
-
+      <Navbar />
       <main className="max-w-5xl mx-auto px-6 py-10">
         <h2 className="text-lg font-medium text-gray-700 mb-6">Your Authorized Applications</h2>
-
         {authorizedApps.length === 0 ? (
           <p className="text-gray-500">No Zoho applications assigned to your role yet.</p>
         ) : (
