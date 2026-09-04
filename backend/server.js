@@ -17,8 +17,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'BrainWave Employee Portal API running' });
 });
 
-// Routes will be mounted here as we build them, e.g.:
-// app.use('/api/auth', require('./src/routes/authRoutes'));
+app.use('/api/auth', require('./src/routes/authRoutes'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
