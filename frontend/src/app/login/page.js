@@ -28,47 +28,68 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-xl shadow-md w-full max-w-sm"
-      >
-        <h1 className="text-2xl font-semibold mb-6 text-center text-gray-800">
-          BrainWave Employee Portal
-        </h1>
-
-        {error && (
-          <div className="bg-red-100 text-red-700 text-sm px-3 py-2 rounded mb-4">
-            {error}
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
+      <div className="w-full max-w-sm">
+        {/* Logo */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-primary mb-4">
+            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
           </div>
-        )}
+          <h1 className="text-xl font-semibold text-text-primary">BrainWave</h1>
+          <p className="text-sm text-text-muted mt-1">Employee Portal</p>
+        </div>
 
-        <label className="block text-sm text-gray-600 mb-1">Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        {/* Form */}
+        <div className="bg-surface border border-border rounded-lg p-6">
+          <h2 className="text-sm font-medium text-text-primary mb-4">Sign in to your account</h2>
 
-        <label className="block text-sm text-gray-600 mb-1">Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="w-full border rounded px-3 py-2 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+          {error && (
+            <div className="bg-danger-light text-danger text-sm px-3 py-2 rounded-md mb-4">
+              {error}
+            </div>
+          )}
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"
-        >
-          {loading ? 'Logging in...' : 'Log In'}
-        </button>
-      </form>
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <div>
+              <label className="block text-xs font-medium text-text-secondary mb-1">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="you@company.com"
+                className="w-full border border-border rounded-md px-3 py-2 text-sm bg-surface text-text-primary placeholder:text-text-muted input"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-text-secondary mb-1">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="••••••••"
+                className="w-full border border-border rounded-md px-3 py-2 text-sm bg-surface text-text-primary placeholder:text-text-muted input"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-primary text-white py-2 rounded-md text-sm font-medium hover:bg-primary-hover disabled:opacity-50 transition-colors"
+            >
+              {loading ? 'Signing in...' : 'Sign in'}
+            </button>
+          </form>
+        </div>
+
+        <p className="text-center text-xs text-text-muted mt-4">
+          Secure access to your Zoho applications
+        </p>
+      </div>
     </div>
   );
 }

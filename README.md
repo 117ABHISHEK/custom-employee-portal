@@ -91,7 +91,9 @@ npm run dev
 App runs at `http://localhost:3000`.
 
 ## Usage
-1. Go to `http://localhost:3000/login` and log in with the bootstrap Admin credentials.
+**Live site:** https://custom-employee-portal-inky.vercel.app
+
+1. Go to the live site (or `http://localhost:3000/login` if running locally) and log in with the bootstrap Admin credentials.
 2. From the Admin Panel, create additional users and assign them roles (HR, Sales, Support, Finance).
 3. Log in as each role to see the dashboard render only their authorized Zoho app.
 
@@ -125,3 +127,7 @@ custom-employee-portal/
 - JWTs expire after 1 hour.
 - The Zoho service account's refresh token is never exposed to the frontend or to employees — all Zoho API calls are proxied through the authenticated backend.
 - `.env` files are excluded from version control via `.gitignore`.
+
+## Live Demo
+- Frontend: https://custom-employee-portal-inky.vercel.app
+- Backend health check: https://custom-employee-portal-jdl6.onrender.com/api/health
