@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const UserRole = require('../models/UserRole');
 const RolePermission = require('../models/RolePermission');
+const Permission = require('../models/Permission');
 const AuditLog = require('../models/AuditLog');
 
 // Helper: get a user's role name + permission names

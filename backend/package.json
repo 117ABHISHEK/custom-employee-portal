@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "seed": "node src/config/seed.js"
+    "seed": "node src/config/seed.js",
+    "bootstrap": "node src/config/bootstrapAdmin.js"
   },
   "keywords": [],
   "author": "",
