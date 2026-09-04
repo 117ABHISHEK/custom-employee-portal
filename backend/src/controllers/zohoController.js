@@ -19,7 +19,7 @@ exports.getPeopleData = async (req, res) => {
 
 exports.getCrmData = async (req, res) => {
   try {
-    const data = await callZohoApi('/crm/v3/Leads');
+    const data = await callZohoApi('/crm/v3/Leads?fields=Last_Name,Email,Company,Lead_Status');
     res.json(data);
   } catch (err) {
     res.status(502).json({ message: 'Failed to fetch Zoho CRM data' });
